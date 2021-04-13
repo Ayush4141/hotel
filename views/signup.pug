@@ -1,0 +1,30 @@
+doctype html
+html
+    head 
+        block head
+            meta(charset='UTF-8')
+            meta(name='viewport' content='width=device-width, initial-scale=1.0')
+            title Ayush Hotels | #{title}
+ 
+
+
+    body
+        .signUp-form
+            h2 Sign Up
+            form.complete-form
+                .form__group
+                    label(for='name') Name
+                    input#name(type='name',   required)
+                .form__group
+                    label(for='email') Email address
+                    input#email(type='email', placeholder='you@example.com', required)
+                .form__group
+                    label(for='password') Password
+                    input#password(type='password', placeholder='••••••••', required, minlength='8')
+                .form__group
+                    label(for='passwordConfirm') Confirm Password
+                    input#passwordConfirm(type='password', placeholder='••••••••',required, minlength='8')
+                .form__group
+                    button SignUp
+                script(src="/js/index.js")
+//-        script(type='text/javascript' src='/../public/js/index.js' )
