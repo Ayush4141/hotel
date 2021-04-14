@@ -18,8 +18,7 @@ if (signForm) {
 		const password = document.getElementById('password').value;
 		const passwordConfirm = document.getElementById('passwordConfirm').value;
 		console.log(name, email, password, passwordConfirm);
-
-		sendData(name, email, password, passwordConfirm);
+		
 		signup(name, email, password, passwordConfirm);
 	});
 }
