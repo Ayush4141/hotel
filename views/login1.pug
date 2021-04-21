@@ -1,0 +1,25 @@
+doctype html
+html
+    head 
+        block head
+            meta(charset='UTF-8')
+            meta(name='viewport' content='width=device-width, initial-scale=1.0')
+            title Ayush Hotels | #{title}
+ 
+
+
+    body
+        .login-form
+            h2 Log In
+            form.complete-form
+                .form__group
+                    label(for='email') Email address
+                    input#email(type='email', placeholder='you@example.com', required)
+                .form__group
+                    label(for='password') Password
+                    input#password(type='password', placeholder='••••••••', required, minlength='8')
+                .form__group
+                    button Log In
+        script(src='https://unpkg.com/axios/dist/axios.min.js')
+        script(type='module' src="/js/index.js")
+//-        script(type='text/javascript' src='/../public/js/index.js' )

@@ -1,0 +1,22 @@
+doctype html
+html
+    head 
+        block head
+            meta(charset='UTF-8')
+            meta(name='viewport' content='width=device-width, initial-scale=1.0')          
+            title Ayush-Hotels | #{title}
+
+
+    body
+        h1 All Hotels
+        .card-container
+            each hotel in hotels
+                h1= `${hotel.name}`
+                p= `${hotel.city}`
+                p= `${hotel.seller.name}` 
+                p= `${hotel.seller.email}`
+                a(href=`/hotel/${hotel.slug}`) Details
+                br
+                br
+                br
+
