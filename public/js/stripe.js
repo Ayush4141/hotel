@@ -9,6 +9,7 @@ const bookHotel = async (hotelId) => {
 		const session = await axios({
 			method: 'GET',
 			url: `http://127.0.0.1:3000/api/bookings/checkoutSession/${hotelId}`,
+			data: {},
 		});
 
 		console.log('Hi from bookHotel func after axios call');
