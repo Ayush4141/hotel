@@ -5,11 +5,12 @@ html
             meta(charset='UTF-8')
             meta(name='viewport' content='width=device-width, initial-scale=1.0')          
             title Ayush-Hotels | #{title}
-            script(src='https://js.stripe.com/v3/')
+            
+
 
 
     body
-        h1 This Hotel
+        h1 This Hotel 1
         p=`${hotel.name}`
         p=`${hotel.city}`
         p=`${hotel.seller.email}`
@@ -18,6 +19,7 @@ html
         if user
             button#book-tour(data-hotel-id=`${hotel.id}`) Book Hotel now!
         else
-            a(href='/login') Login to Book      
+            a(href='/login') Login to Book     
         script(src='https://unpkg.com/axios/dist/axios.min.js')
         script(type='module' src="/js/stripe.js")
+        script(src='https://js.stripe.com/v3/')

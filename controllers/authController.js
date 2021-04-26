@@ -66,12 +66,12 @@ exports.logout = (req, res) => {
 };
 
 exports.protect = catchAsync(async (req, res, next) => {
-	console.log('Hi from authcontroller.protect');
+//	console.log('Hi from authcontroller.protect');
 	let token;
 	if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
 		token = req.headers.authorization.split(' ')[1];
 	} else if (req.cookies.jwt) {
-		console.log('Here is a cookie from authcontroller');
+//		console.log('Here is a cookie from authcontroller');
 		token = req.cookies.jwt;
 	}
 
@@ -80,7 +80,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 	}
 
 	const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-	console.log('decoded');
+//	console.log('decoded');
 
 	//Check if user exists
 	const currentUser = await User.findById(decoded.id);

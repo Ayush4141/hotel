@@ -1,11 +1,12 @@
 const express = require('express');
+const Booking = require('./../models/bookingModel');
 const User = require('./../models/userModel');
 const Hotel = require('./../models/hotelModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 
 exports.getOverview = catchAsync(async (req, res, next) => {
-	console.log('Hi');
+	//	console.log('Hi');
 	//Get Data from tour collection
 	const hotels = await Hotel.find();
 	// Build template
@@ -21,7 +22,7 @@ exports.getOverview = catchAsync(async (req, res, next) => {
 exports.getWelcome = catchAsync(async (req, res, next) => {
 	// console.log('Hi');
 	//Get Data from tour collection
-//	const hotels = await Hotel.find();
+	//	const hotels = await Hotel.find();
 	// Build template
 
 	// Render that template
@@ -61,3 +62,18 @@ exports.getLoginForm = (req, res) => {
 		title: 'log into your account',
 	});
 };
+
+exports.getMyHotels = catchAsync(async (req, res, next) => {
+	// 1) Find all bookings
+	console.log('Hello from get my Hotels1');
+	const bookings = await Booking.find({ user: req.user.id });
+
+	// 2) Find tours with the returned IDs
+	const hotelIDs = bookings.map((el) => el.hotel);
+	const hotels = await Hotel.find({ _id: { $in: hotelIDs } });
+	console.log('Hello from get my hotels2');
+	res.status(200).render('overview1', {
+		title: 'My Hotels',
+		hotels,
+	});
+});
