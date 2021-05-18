@@ -1,4 +1,3 @@
-//const stripe = require('stripe')("sk_test_51Ii1BOSEviyu8hyP8X3AZIaX9R485GGAbLCuU9XtNqKBbCn8y9v8dGAicO3NWhcudigOmX2A8c4lpID7nwnXzH5F00iHMPYh5D");
 const stripe = require('stripe')(
 	'sk_test_51Ii1BOSEviyu8hyP8X3AZIaX9R485GGAbLCuU9XtNqKBbCn8y9v8dGAicO3NWhcudigOmX2A8c4lpID7nwnXzH5F00iHMPYh5D'
 );
@@ -13,7 +12,8 @@ const factory = require('./handleFactory');
 exports.getCheckOutSession = catchAsync(async (req, res, next) => {
 	//Get current tour
 	const hotel = await Hotel.findById(req.params.hotelId);
-	//			console.log(hotel);
+
+	console.log('Hello hi from booking Controller');
 
 	// const a = `localhost:3000/myHotels/?hotel=${req.params.hotelId}&user=${req.user.id}&price=${hotel.price}`;
 	// console.log(a);
@@ -22,6 +22,7 @@ exports.getCheckOutSession = catchAsync(async (req, res, next) => {
 	//	console.log(`${req.user.email}`);
 	//	console.log(req.params.hotelId);
 	//	console.log(`${hotel.name} ${hotel.id} ${req.user.email} ${hotel.price} ` );
+
 	//2Create checkout session
 	const session = await stripe.checkout.sessions.create({
 		payment_method_types: ['card'],
@@ -35,7 +36,7 @@ exports.getCheckOutSession = catchAsync(async (req, res, next) => {
 				name: `${hotel.name} Hotel`,
 				description: `${hotel.name}`,
 				images: [`https://drive.google.com/file/d/1a5N5xv8uJLGXA2ogfQ_15vUZCPj7Sb1J/view?usp=sharing`],
-				amount: hotel.price  * 100,
+				amount: hotel.price * 100,
 				currency: 'INR',
 				quantity: 1,
 			},
@@ -43,7 +44,6 @@ exports.getCheckOutSession = catchAsync(async (req, res, next) => {
 		mode: 'payment',
 	});
 
-	console.log('Hello hi from booking Controller');
 
 	//Create session as response
 	res.status(200).json({
