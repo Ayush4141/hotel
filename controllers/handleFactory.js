@@ -7,7 +7,7 @@ exports.createOne = (Model) =>
 	catchAsync(async (req, res, next) => {
 		
 		const doc = await Model.create(req.body);
-		console.log('Creating');
+		//console.log('Creating');
 		res.status(201).json({
 			status: 'success',
 			data: {
@@ -19,7 +19,7 @@ exports.createOne = (Model) =>
 exports.getAll = (Model) =>
 	catchAsync(async (req, res, next) => {
 		//To allow nested GET Reviews on the tour route(hack)
-		console.log("Get all");
+		//console.log("Get all");
 		let filter = {};
 		if (req.params.hotelId) filter = { hotel: req.params.hotelId };
 		// if (req.params.cityId)  filter = { city: req.params.cityId};

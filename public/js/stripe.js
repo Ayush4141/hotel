@@ -5,9 +5,9 @@ const stripe = Stripe(
 const bookHotel = async (hotelId, abc) => {
 	try {
 		const hotelIdAndDate1 = `${hotelId}_${abc}`;
-		console.log(`${hotelIdAndDate1}`);
+		//console.log(`${hotelIdAndDate1}`);
 
-		const session = await axios.get(`http://localhost:3000/api/bookings/checkoutSession/${hotelIdAndDate1}`);
+		const session = await axios.get(`/api/bookings/checkoutSession/${hotelIdAndDate1}`);
 
 		// const res = await axios.get(`https://reqres.in/api/users`);
 		// console.log(res);
@@ -16,8 +16,6 @@ const bookHotel = async (hotelId, abc) => {
 		// http://127.0.0.1:3000/api/bookings/checkoutSession/607edcb20737817dccaa787d
 		// http://127.0.0.1:3000/api/bookings/checkoutSession/607edcb20737817dccaa787d
 
-		console.log('Hi from bookHotel func after axios call');
-		//		console.log(session);
 
 		// const session = await axios({ method: 'GET', url: `http://127.0.0.1:3000/api/bookings/checkoutSession/${hotelId}`,});
 		// console.log(session);

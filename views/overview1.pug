@@ -5,9 +5,9 @@ block content
         .dropdown
             button.dropbtn Sort
             .dropdown-content
-                a(href=`http://localhost:3000/hotelsIn/${hotels[0].city}?sort=-ratingsAverage`) Avg Ratings
-                a(href=`http://localhost:3000/hotelsIn/${hotels[0].city}?sort=price`) Price Low to High 
-                a(href=`http://localhost:3000/hotelsIn/${hotels[0].city}?sort=-price`) Price High to Low
+                a(href=`/hotelsIn/${hotels[0].city}?sort=-ratingsAverage`) Avg Ratings
+                a(href=`/hotelsIn/${hotels[0].city}?sort=price`) Price Low to High 
+                a(href=`/hotelsIn/${hotels[0].city}?sort=-price`) Price High to Low
                     //-`http://localhost:3000/hotel/${hotel.slug}` 
     .second-div
         h1(style="font-family:Arial")= `${noOfHotel} Hotels in ${hotels[0].city}  `

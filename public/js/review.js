@@ -3,13 +3,13 @@ const createReview = async (review, rating, hotelId) => {
 	try {
 		const res = await axios({
 			method: 'POST',
-			url: `http://localhost:3000/api/hotels/${hotelId}/reviews`,
+			url: `/api/hotels/${hotelId}/reviews`,
 			data: {
 				review,
 				rating,
 			},
 		});
-		console.log(res.data);
+		//console.log(res.data);
 		if (res.data.status === 'success') {
 			//showAlert('success', 'Logged in successfully!');
 			window.setTimeout(() => {

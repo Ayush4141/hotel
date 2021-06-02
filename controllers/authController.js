@@ -42,7 +42,7 @@ exports.signup = catchAsync(async (req, res, next) => {
 		passwordConfirm: req.body.passwordConfirm,
 		role: req.body.role,
 	});
-	console.log('HERE');
+	//console.log('HERE');
 	createSendToken(newUser, 201, res);
 });
 

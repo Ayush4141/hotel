@@ -9,7 +9,7 @@ block content
             ul
                 each arr1 in arr
                     li.listItem
-                        a(href=`http://localhost:3000/hotelsIn/${arr1}`)= `${arr1}`
+                        a(href=`/hotelsIn/${arr1}`)= `${arr1}`
             //- h4 Nature 
         .near-me
             button.near1(onclick='getLocation()' style="width:100%;height: 80%; color: white ; background-color:#eb4d4b; font-size: large; border-radius:10%; outline:none; ") Near Me 
@@ -109,4 +109,3 @@ block content
     
     script(src='https://unpkg.com/axios/dist/axios.min.js')
     script(type='module' src="/js/index.js")
-    //- script(type='module' src="/js/a2.js")

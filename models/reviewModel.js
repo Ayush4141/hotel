@@ -50,7 +50,7 @@ reviewSchema.pre(/^find/, function (next) {
 });
 
 reviewSchema.statics.calcAverageRatings = async function (hotelId) {
-	console.log(hotelId);
+	//console.log(hotelId);
 	const stats = await this.aggregate([
 		{
 			$match: { hotel: hotelId },
@@ -79,7 +79,7 @@ reviewSchema.statics.calcAverageRatings = async function (hotelId) {
 
 reviewSchema.post('save', function () {
 	//This points to current review
-	console.log('POST');
+	//console.log('POST');
 	this.constructor.calcAverageRatings(this.hotel);
 	//	next();
 });

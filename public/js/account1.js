@@ -2,15 +2,15 @@ const updateSettings = async (data, type) => {
 	try {
 		const url =
 			type === 'password'
-				? 'http://localhost:3000/api/users/updateMyPassword'
-				: 'http://localhost:3000/api/users/updateMe';
+				? '/api/users/updateMyPassword'
+				: '/api/users/updateMe';
 
 		const res = await axios({
 			method: 'PATCH',
 			url,
 			data,
 		});
-        console.log("Successful");
+        //console.log("Successful");
 		if (res.data.status === 'success') {
             window.setTimeout(() => {
                 location.assign('/');
@@ -23,7 +23,6 @@ const updateSettings = async (data, type) => {
 };
 
 const userDataForm = document.querySelector('.form-user-data');
-console.log('Hello');
 if (userDataForm)
 	userDataForm.addEventListener('submit', (e) => {
 		e.preventDefault();
@@ -31,7 +30,7 @@ if (userDataForm)
 		form.append('name', document.getElementById('name').value);
 		form.append('email', document.getElementById('email').value);
 		form.append('photo', document.getElementById('photo').files[0]);
-		console.log(form);
+		//console.log(form);
 
 		updateSettings(form, 'data');
 	});

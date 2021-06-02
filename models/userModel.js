@@ -59,7 +59,7 @@ userSchema.pre(/^find/, function (next) {
 });
 
 userSchema.methods.correctPassword = async function (candidatePassword, userPassword) {
-	console.log('E');
+	//console.log('E');
 	return await bcrypt.compare(candidatePassword, userPassword);
 };
 

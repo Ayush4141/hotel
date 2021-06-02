@@ -11,13 +11,13 @@ const factory = require('./handleFactory');
 
 exports.getCheckOutSession = catchAsync(async (req, res, next) => {
 	//Get current tour
-	console.log('Hello hi from booking Controller');
+	//console.log('Hello hi from booking Controller');
 	const hotelIdAndDate1 = req.params.hotelIdAndDate1;
 	const hotelId = hotelIdAndDate1.split('_')[0];
 	const date1 = hotelIdAndDate1.split('_')[1];
 
-	console.log(hotelId);
-	console.log(date1);
+	//console.log(hotelId);
+	//console.log(date1);
 
 	const hotel = await Hotel.findById(hotelId);
 	//const date1 =
@@ -32,8 +32,8 @@ exports.getCheckOutSession = catchAsync(async (req, res, next) => {
 	//2Create checkout session
 	const session = await stripe.checkout.sessions.create({
 		payment_method_types: ['card'],
-		success_url: `http://localhost:3000/myHotels/?hotel=${hotelId}&user=${req.user.id}&price=${hotel.price}&date1=${date1}`,
-		cancel_url: `https://www.google.com/`,
+		success_url: `/myHotels/?hotel=${hotelId}&user=${req.user.id}&price=${hotel.price}&date1=${date1}`,
+		cancel_url: `/`,
 
 		customer_email: req.user.email,
 		client_reference_id: req.params.hotelId,

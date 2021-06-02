@@ -71,7 +71,7 @@ hotelSchema.virtual('reviews', {
 });
 
 hotelSchema.pre('save', function (next) {
-	console.log('Heavy driver 2');
+	//console.log('Hii');
 	this.slug = slugify(this.name, { lower: true });
 
 	next();

@@ -1,24 +1,20 @@
 /* eslint-disable */
 var input = document.querySelector('#date-string');
 
-//var hrefTag;
 
 input.addEventListener('input', () => {
 	input = input.value.toString();
-	//	hrefTag = `http://127.0.0.1:3000/bookHotel/${hotel.id}_${input}`;
 
-	//	document.getElementById('he').href = hrefTag;
-	//	document.getElementById('lol').innerText = input;
-	console.log(typeof input);
-	console.log(input.length);
-	console.log(input); // 2021-03-31
+	// console.log(typeof input);
+	// console.log(input.length);
+	// console.log(input); // 2021-03-31
 });
 
 document.getElementById('proceed').click(function () {
-	console.log('Hello 2');
+	//console.log('Hello 2');
 });
 
-console.log('Hello world');
+// console.log('Hello world');
 
 export const displayMap = (locations) => {
 	mapboxgl.accessToken =
@@ -89,7 +85,7 @@ if (proceed1) {
 		}else{
 			e.target.textContent = 'Processing... ';
 			const { hotelId } = e.target.dataset;
-			location.assign(`http://localhost:3000/bookHotel/${hotelId}_${input}`);
+			location.assign(`/bookHotel/${hotelId}_${input}`);
 
 		}
 
