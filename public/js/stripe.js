@@ -2,24 +2,19 @@ const stripe = Stripe(
 	'pk_test_51Ii1BOSEviyu8hyPnFhLhNK9rpY5beMmM8ihIiAhGUCyvRYWSZCuAmuV0QKmhYPNkU0T0ddde0W4t3eEEa9pRE6X00wA40FwHY'
 );
 
-const bookHotel = async (hotelId) => {
+const bookHotel = async (hotelId, abc) => {
 	try {
-		console.log(`${hotelId}`);
+		const hotelIdAndDate1 = `${hotelId}_${abc}`;
+		console.log(`${hotelIdAndDate1}`);
 
-		// const session = await axios({
-		// 	method: 'GET',
-		// 	url: `http://127.0.0.1:3000/api/bookings/checkoutSession/${hotelId}`,
-		// });
+		const session = await axios.get(`http://localhost:3000/api/bookings/checkoutSession/${hotelIdAndDate1}`);
 
 		// const res = await axios.get(`https://reqres.in/api/users`);
 		// console.log(res);
-		
+
 		// console.log(`http://127.0.0.1:3000/api/bookings/checkoutSession/${hotelId}`);
 		// http://127.0.0.1:3000/api/bookings/checkoutSession/607edcb20737817dccaa787d
 		// http://127.0.0.1:3000/api/bookings/checkoutSession/607edcb20737817dccaa787d
-		
-
-		const session = await axios.get(`http://127.0.0.1:3000/api/bookings/checkoutSession/${hotelId}`);
 
 		console.log('Hi from bookHotel func after axios call');
 		//		console.log(session);
@@ -41,7 +36,10 @@ if (bookBtn) {
 	bookBtn.addEventListener('click', (e) => {
 		e.target.textContent = 'Processing... ';
 		const { hotelId } = e.target.dataset;
-		//    console.log(hotelId);
-		bookHotel(hotelId);
+		//		const hotelId = e.target.dataset.hotelId;
+		const { abc } = e.target.dataset;
+		// console.log(hotelId);
+		// console.log(abc);
+		bookHotel(hotelId, abc);
 	});
 }

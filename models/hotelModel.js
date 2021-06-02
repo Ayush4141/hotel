@@ -2,55 +2,78 @@ const mongoose = require('mongoose');
 const slugify = require('slugify');
 const validator = require('validator');
 
-const hotelSchema = new mongoose.Schema({
-	name: {
-		type: String,
-		require: [true, 'A hotel must have a name'],
-		trim: true,
-		minlength: [3, 'Not less than three letters'],
-	},
-	seller: {
-		type: mongoose.Schema.ObjectId,
-		ref: 'User',
-		required: [true],
-	},
-	slug: String,
+const hotelSchema = new mongoose.Schema(
+	{
+		name: {
+			type: String,
+			require: [true, 'A hotel must have a name'],
+			trim: true,
+			minlength: [3, 'Not less than three letters'],
+		},
+		seller: {
+			type: mongoose.Schema.ObjectId,
+			ref: 'User',
+			required: [true],
+		},
+		slug: String,
 
-	city: String,
+		ratingsAverage: {
+			type: Number,
+			default: 0,
+			min: [0, 'Rating must be above 1'],
+			max: [5, 'Ratings must be less than 5'],
+			set: (val) => Math.round(val * 10) / 10,
+		},
 
-	price: {
-		type: Number,
-		required: [true , "Price is required"]
-	},
+		ratingsQuantity: {
+			type: Number,
+			default: 0,
+		},
 
-	deluxeRooms: {
-		type: Number,
-		//	required: true,
-	},
+		city: String,
 
-	premiumRooms: {
-		type: Number,
-		//	required: true,
-	},
+		price: {
+			type: Number,
+			required: [true, 'Price is required'],
+		},
+		startLocation: {
+			// GeoJSON
+			type: {
+				type: String,
+				default: 'Point',
+				enum: ['Point'],
+			},
+			coordinates: [Number],
+			address: String,
+			description: String,
+		},
+		rooms: {
+			type: Number,
+		},
+		images: [String],
 
-	deluxePrice: {
-		type: Number,
-		//required: true,
-	},
 
-	premiumPrice: {
-		type: Number,
-		//required: true,
+		description: {
+			type: String,
+			default: 'Default Description',
+		},
 	},
+	{
+		toJSON: { virtuals: true },
+		toObject: { virtuals: true },
+	}
+);
 
-	description: {
-		type: String,
-		default: 'Default Description',
-	},
+hotelSchema.virtual('reviews', {
+	ref: 'Review',
+	foreignField: 'hotel',
+	localField: '_id',
 });
 
 hotelSchema.pre('save', function (next) {
+	console.log('Heavy driver 2');
 	this.slug = slugify(this.name, { lower: true });
+
 	next();
 });
 

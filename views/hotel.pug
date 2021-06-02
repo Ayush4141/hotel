@@ -1,23 +1,91 @@
-doctype html
-html
-    head 
-        block head
-            meta(charset='UTF-8')
-            meta(name='viewport' content='width=device-width, initial-scale=1.0')          
-            title Ayush-Hotels | #{title}
-            
-    body
-        h1 This Hotel 1
-        p=`${hotel.name}`
-        p=`${hotel.city}`
-        p=`${hotel.seller.email}`
-        p=`${hotel.price}`
-        br
-        if user
-            button#book-tour(data-hotel-id=`${hotel.id}`) Book Hotel now!
-        else
-            a(href='/login') Login to Book  
-        script(src='https://js.stripe.com/v3/')   
-        script(src='https://unpkg.com/axios/dist/axios.min.js')       
-        script(type='module' src="/js/stripe.js")
+extends base
+include _reviewCard
+
+block append head 
+    script(src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js')
+    link(href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet')
+
+
+block content
+
+    .contain2 
+        img(src=`/img/homeimages/${hotel.images[0]}.jpg` style='width: 100%; height: 85%; object-fit: cover; ')
+        img(src=`/img/homeimages/${hotel.images[1]}.jpg` style='width: 100%; height: 85%; object-fit: cover;')
+    .contain3
+        .contain5
+            .contain9 
+                h1(style="letter-spacing:0.22rem; padding-top:2%")=`${hotel.name}`
+                p(style="font-size: large; padding-top:1.2%")= `${hotel.startLocation.address}`  
+            .contain10
+                h2 Amenities
+                .c11 
+                    //- p 1
+                    span(style="padding-left: 3.0rem; padding-top: 1.5rem; font-size:x-large;").fa.fa-tv.checked
+                    p(style="padding-left: 1.0rem; padding-top: 1.2rem; font-size:x-large;") Television
+                    span(style="padding-left: 3.0rem; padding-top: 1.5rem; font-size:x-large;").fa.fa-car.checked
+                    p(style="padding-left: 1.0rem; padding-top: 1.2rem; font-size:x-large;") Easy Transport
+                    span(style="padding-left: 2.5rem; padding-top: 1.5rem; font-size:x-large;").fa.fa-laptop.checked
+                    p(style="padding-left: 1.0rem; padding-top: 1.2rem; font-size:x-large;") AC Rooms
+                .c12
+                    span(style="padding-left: 3.0rem; padding-top: 1.5rem; font-size:x-large;").fa.fa-coffee.checked
+                    p(style="padding-left: 1.0rem; padding-top: 1.2rem; font-size:x-large;") Restaurant
+                    span(style="padding-left: 2.5rem; padding-top: 1.5rem; font-size:x-large;").fa.fa-wifi.checked
+                    p(style="padding-left: 1.0rem; padding-top: 1.2rem; font-size:x-large;") Free Wifi
+                    span(style="padding-left: 6.0rem; padding-top: 1.5rem; font-size:x-large;").fa.fa-heart.checked
+                    p(style="padding-left: 1.0rem; padding-top: 1.2rem; font-size:x-large;") Customer Trusted
+                    //- p 2
+                    //- p 3
+            .contain11 
+                h2 Contact
+                p(style="padding-left: 3.0rem; padding-top: 1.5rem; font-size:large; font-family:Arial")= `${hotel.seller.email}`
+            .contain12 
+                h2 Price
+                p(style="padding-left: 3.0rem; padding-top: 0.0rem; font-size:3vw; font-weight:bold; font-family:Arial; color: #ea4d4b;")= `₹ ${hotel.price}`
+                p(style="padding-left: 3.0rem; padding-top: 0.8rem; font-size: medium;") per Night per Room
+            .contain13 
+                .contain14 
+                    h2(style="margin-right:3%") Avg Rating :
+                    .contain15
+                        h2(style="font-size:x-large; padding-right:5%;font-family:Arial;padding-top:10%; padding-left:5%")=`${hotel.ratingsAverage}`
+                        span(style="font-size:x-large; padding-top:10%; padding-left:7%").fa.fa-star.checked
+                    p(style="padding-left:3%; font-size:large; padding-top:2%; font-family:Arial")=`${hotel.ratingsQuantity} Ratings`
+                    
+                //- p=`${hotel.ratingsQuantity} Ratings`
+        .contain6
+            .contain7 
+                label(for='date-string' style="font-size: x-large; font-weight:bold;letter-spacing:0.16rem")  Choose date for booking    . .
+                .divv
+                    input#date-string(type='date' name='trip-start' min='2021-05-25' max='2021-12-31' style="margin-left: 1rem; width:30%; height: 50%"  value="")
+                .divv1
+                    if user
+                        button#proceed(data-hotel-id=`${hotel.id}` style="background-color: #eb4d4b; color: white; outline:none; width: 45%; height: 3rem; border-radius: 1rem; font-size: large; ") Proceed
+                    else
+                        button(data-hotel-id=`${hotel.id}` style="background-color: #eb4d4b; color: white; outline:none; width: 45%; height: 3rem; border-radius: 1rem; font-size: large; ") Login to Proceed
+            .contain8
+                section.section-map
+                    #map(data-locations=`${JSON.stringify(hotel.startLocation)}`)
+    .contain4
+        .r1
+            h2(style="font-size:2vw") Reviews 
+        .r2
+            each review in hotel.reviews
+                +reviewCard(review)
+
+    br
+
+    br
+    br    
+    //- .contain0
+    script(type='module' src="/js/mapBox.js")
+    //-     section.section-reviews
+    //-         .reviews
+    //-             each review in hotel.reviews
+    //-                 +reviewCard(review)
+        
+    //-         //-p= `${hotel.reviews[0].review}`
+    //-         br
+    //-         br
+    //-         //- section.section-map
+    //-         //-     #map(data-locations=`${JSON.stringify(hotel.startLocation)}`)
+    //-     .main8         
         

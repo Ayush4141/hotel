@@ -11,10 +11,16 @@ const factory = require('./handleFactory');
 
 exports.getCheckOutSession = catchAsync(async (req, res, next) => {
 	//Get current tour
-	const hotel = await Hotel.findById(req.params.hotelId);
-
 	console.log('Hello hi from booking Controller');
+	const hotelIdAndDate1 = req.params.hotelIdAndDate1;
+	const hotelId = hotelIdAndDate1.split('_')[0];
+	const date1 = hotelIdAndDate1.split('_')[1];
 
+	console.log(hotelId);
+	console.log(date1);
+
+	const hotel = await Hotel.findById(hotelId);
+	//const date1 =
 	// const a = `localhost:3000/myHotels/?hotel=${req.params.hotelId}&user=${req.user.id}&price=${hotel.price}`;
 	// console.log(a);
 	// const b = `localhost:3000/hotel/${hotel.slug}`;
@@ -26,7 +32,7 @@ exports.getCheckOutSession = catchAsync(async (req, res, next) => {
 	//2Create checkout session
 	const session = await stripe.checkout.sessions.create({
 		payment_method_types: ['card'],
-		success_url: `https://www.google.com/`,
+		success_url: `http://localhost:3000/myHotels/?hotel=${hotelId}&user=${req.user.id}&price=${hotel.price}&date1=${date1}`,
 		cancel_url: `https://www.google.com/`,
 
 		customer_email: req.user.email,
@@ -43,7 +49,7 @@ exports.getCheckOutSession = catchAsync(async (req, res, next) => {
 		],
 		mode: 'payment',
 	});
-
+	console.log(session.id);
 
 	//Create session as response
 	res.status(200).json({
@@ -55,10 +61,10 @@ exports.getCheckOutSession = catchAsync(async (req, res, next) => {
 
 exports.createBookingCheckout = catchAsync(async (req, res, next) => {
 	//This is temporary as unsecure , because anyone can make bookings without paying
-	const { hotel, user, price } = req.query;
-	if (!hotel && !user && !price) return next();
+	const { hotel, user, price, date1 } = req.query;
+	if (!hotel && !user && !price && !date1) return next();
 
-	await Booking.create({ hotel, user, price });
+	await Booking.create({ hotel, user, price, date1 });
 
 	res.redirect(req.originalUrl.split('?')[0]);
 });

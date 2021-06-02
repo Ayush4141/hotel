@@ -7,6 +7,7 @@ const userRouter = require('./routes/userRoute');
 const viewRouter = require('./routes/viewRoutes');
 const hotelRouter = require('./routes/hotelRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
+const reviewRouter = require('./routes/reviewRoutes');
 //const cors = require('cors');
 
 const app = express();
@@ -28,6 +29,7 @@ app.use(cookieParser());
 app.use('/api/users', userRouter);
 app.use('/api/hotels', hotelRouter);
 app.use('/api/bookings', bookingRouter);
+app.use('/api/reviews', reviewRouter);
 app.use('/', viewRouter);
 
 app.use(globalErrorHandler);

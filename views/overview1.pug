@@ -1,22 +1,60 @@
-doctype html
-html
-    head 
-        block head
-            meta(charset='UTF-8')
-            meta(name='viewport' content='width=device-width, initial-scale=1.0')          
-            title Ayush-Hotels | #{title}
+extends base
 
-
-    body
-        h1 All Hotels
+block content
+    .first-div 
+        .dropdown
+            button.dropbtn Sort
+            .dropdown-content
+                a(href=`http://localhost:3000/hotelsIn/${hotels[0].city}?sort=-ratingsAverage`) Avg Ratings
+                a(href=`http://localhost:3000/hotelsIn/${hotels[0].city}?sort=price`) Price Low to High 
+                a(href=`http://localhost:3000/hotelsIn/${hotels[0].city}?sort=-price`) Price High to Low
+                    //-`http://localhost:3000/hotel/${hotel.slug}` 
+    .second-div
+        h1(style="font-family:Arial")= `${noOfHotel} Hotels in ${hotels[0].city}  `
+        br
         .card-container
             each hotel in hotels
-                h1= `${hotel.name}`
-                p= `${hotel.city}`
-                p= `${hotel.seller.name}` 
-                p= `${hotel.seller.email}`
-                a(href=`/hotel/${hotel.slug}`) Details
-                br
-                br
-                br
+                .card-hotel
+                    .div1
+                        img(src=`/img/homeimages/${hotel.images[0]}.jpg` style='width: 100%; height: 100%; object-fit: cover; border-top-left-radius: 8%;')
+
+
+                    .div2
+                        h1= `${hotel.name}`
+                        p(style='font-size:1.5vw')= `${hotel.startLocation.address}`
+                        br
+                        .div111
+                            .div11 
+                                .div21
+                                    //-p= `${hotel.ratingsAverage}`
+                                    span(style="font-family:Arial")= `${hotel.ratingsAverage}` 
+                                .div22
+                                    span.fa.fa-star.checked
+                            nav.nav1
+                                span(style="padding-left: 10.0rem; padding-top: 0.3rem; font-size:x-large;").fa.fa-wifi.checked
+                                span(style="padding-left: 0.4rem; font-size:large") Free Wifi
+                                span(style="padding-left: 2.0rem; padding-top: 0.3rem; font-size:x-large;").fa.fa-car.checked
+                                span(style="padding-left: 0.4rem; font-size:large ; font-weight:lighter") Parking Facility
+                            //- .div121
+                            //-     nav
+                            //-         span.fa.fa-wifi.checked
+                            //-         p Free Wifi
+                        p(style='font-size:1.2vw; font-family:Arial; font-size: medium; padding-top:0.6rem')= ` (${hotel.ratingsQuantity} Ratings)`
+                        .priceAndDetail
+                            p(style="font-family:Arial;float: left; font-size: 2.0vw; font-weight:bold; color:red ; padding-top: 2rem")= `₹ ${hotel.price}`
+                            a.pd1(href=`http://localhost:3000/hotel/${hotel.slug}` style="padding-top:14% ; width:40%; height: 100%")
+                                input.pd2(type='submit' value='Details' style="background-color:#eb4d4b; color:white; height:100%; width:100%; font-size:large; border-radius:10%")
+                        //-p= `Avg Rating     ${hotel.ratingsAverage}`
+                        //-p= `No. of Reviews ${hotel.ratingsQuantity}`
+                        //-p= `http://127.0.0.1:3000/hotel/${hotel.slug}`
+                        //-button#search-detail(data-hotel-id=`${hotel.slug}`) Details!
+                        //-button(onclick="document.location=`http://127.0.0.1:3000/hotel/{hotel.slug}`") HTML Tutorial
+                        //-a(href=`/hotel/${hotel.slug}`) Details
+                        //- a(href=`http://localhost:3000/hotel/${hotel.slug}`)
+                        //-     input(type='submit' value='Details')
+                    br
+                    br
+                    br
+                    hr.hr1
+                    br
 

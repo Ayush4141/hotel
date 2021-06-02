@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.use(authController.protect);
 
-router.get('/checkoutSession/:hotelId', bookingController.getCheckOutSession);
+router.get('/checkoutSession/:hotelIdAndDate1', bookingController.getCheckOutSession);
 
 // router.post('/checkoutSession/:hotelId', async (req ,res) =>{
 //     	const hotel = await Hotel.findById(req.params.hotelId);

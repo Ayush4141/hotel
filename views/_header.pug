@@ -1,0 +1,18 @@
+header.header 
+    .welcome1
+        .welcome2
+            //- p U_STAY
+            a(href=`http://localhost:3000/` style="color:white; text-decoration:none") U_STAY
+        .welcome3
+            nav.nav 
+                if user
+                    //-a(href='/logout') Log Out
+                    button.nav__el#log-out Log Out
+                    a.nav__el(href='/my-profile')
+                        img.nav__user-img(src=`/img/users/${user.photo}` alt=`Photo of ${user.name}`)
+                        span= user.name.split(' ')[0]
+                else 
+                    //-p Login
+                    a.nav__el(href='/login') Log in
+                    a.nav__el.nav__el--cta(href='/signup') Sign up
+    

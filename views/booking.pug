@@ -1,0 +1,30 @@
+extends base           
+
+block content
+    .d1 
+        .d2
+            h1 Pay and Confirm your Booking
+            br
+            br
+            h2 Hotel Details
+            br 
+            h3(style="padding-left: 5%;padding-top:3%")=`${hotel.name}`
+            br
+            h3(style="padding-left: 5%;padding-top:2%; font-family:Arial")=`Price : ₹ ${hotel.price}`
+            br
+            .d3
+                h3(style="padding-left: 5%;padding-top:2%; font-family:Arial; ")= `Date of booking (YYYY-MM-DD)`            
+                h3(style="padding-left: 5%;padding-top:2%; font-family:Arial; color:red; font-size:x-large ")=`${date1}`
+                br
+                br
+                br
+            button.d4#book-tour(data-hotel-id=`${hotel.id}` data-abc=`${date1}` )= `Pay ₹ ${hotel.price}`    
+    //- p Rooms are Available, Please complete details and book
+    //- p= `${hotel.name}`
+    //- p= `${available}`
+    //- p= `${date1}`
+    //- button#book-tour(data-hotel-id=`${hotel.id}` data-abc=`${date1}` ) Book Hotel now!
+
+    script(src='https://js.stripe.com/v3/')
+    script(src='https://unpkg.com/axios/dist/axios.min.js')               
+    script(src="/js/stripe.js")

@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema({
 		lowercase: true,
 		validate: [validator.isEmail, 'Please provide a valid email'],
 	},
+	photo: {
+		type: String,
+		default: 'default.jpg',
+	},
 	password: {
 		type: String,
 		required: [true, 'Please provide a password'],
@@ -34,7 +38,7 @@ const userSchema = new mongoose.Schema({
 	},
 	role: {
 		type: String,
-		enum: ['user', 'seller' ,'admin'],
+		enum: ['user', 'seller', 'admin'],
 		default: 'user',
 	},
 });
@@ -53,6 +57,11 @@ userSchema.pre(/^find/, function (next) {
 	this.find({ active: { $ne: false } });
 	next();
 });
+
+userSchema.methods.correctPassword = async function (candidatePassword, userPassword) {
+	console.log('E');
+	return await bcrypt.compare(candidatePassword, userPassword);
+};
 
 const User = mongoose.model('User', userSchema);
 

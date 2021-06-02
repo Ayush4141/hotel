@@ -1,0 +1,30 @@
+doctype html
+html
+    head
+        block head
+            meta(charset='UTF-8')
+            meta(name='viewport' content='width=device-width, initial-scale=1.0')
+            title Ayush-Hotels | #{title}
+            link(rel='stylesheet' href='/css/style.css')
+            link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
+            link(href='https://fonts.googleapis.com/css?family=Buenard' rel='stylesheet')
+            style.
+                body {
+                font-family: 'Buenard';
+                }
+
+    body
+        // HEADER
+        include _header
+
+        // CONTENT
+        block content
+
+            //- // FOOTER
+        include _footer
+
+    //- script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js')
+    //- script(src='/js/mapbox.js')
+    //- script(src='/js/login.js')
+    //- script(src='https://js.stripe.com/v3/')
+    //- script(src='/js/bundle.js')

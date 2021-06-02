@@ -1,11 +1,112 @@
-doctype html
-html
-    head 
-        block head
-            meta(charset='UTF-8')
-            meta(name='viewport' content='width=device-width, initial-scale=1.0')          
-            title Ayush-Hotels | #{title}
+extends base
+
+block content
+
+    .container1 
+        img(src='/img/homeimages/img4.jpg' style='width: 100%; height: 680px; opacity:0.6')
+        .text-block 
+            input#searchBar(type='text' oninput='Search((this.value).toLowerCase())' placeholder='Search in your city...')
+            ul
+                each arr1 in arr
+                    li.listItem
+                        a(href=`http://localhost:3000/hotelsIn/${arr1}`)= `${arr1}`
+            //- h4 Nature 
+        .near-me
+            button.near1(onclick='getLocation()' style="width:100%;height: 80%; color: white ; background-color:#eb4d4b; font-size: large; border-radius:10%; outline:none; ") Near Me 
+    br
+    br
+    br
+    br
+    br
 
 
-    body
-        h1 Welcome
+
+
+
+
+
+    //- .slideshow-container
+    //-     .mySlides.fade
+    //-         .numbertext 1 / 3
+    //-         //- img(src='/img/homeimages/img1.jpg' style='width:100%')
+    //-         img(src='/img/homeimages/img1.jpg' style='width:100%; height: 600px;')
+    //-         .text Caption Text
+    //-     .mySlides.fade
+    //-         .numbertext 2 / 3
+    //-         img(src='/img/homeimages/img2.jpg' style='width:100%; height: 600px')
+    //-         .text Caption Two
+    //-     .mySlides.fade
+    //-         .numbertext 3 / 3
+    //-         img(src='/img/homeimages/img3.jpg' style='width:100%; height: 600px')
+    //-         .text Caption Three       
+    //- br
+    //- div(style='text-align:center')
+    //-     span.dot
+    //-     span.dot
+    //-     span.dot
+    //- br
+    //- .aaaaa
+    //-     h1 Welcome
+    //- .aaaa1
+    //-     h1 Collection of elements:
+    //-     //-input#searchBar(type='text' oninput='Search((this.value).toLowerCase())' placeholder='Search in your city...')
+    //-     br
+    //-     br
+    //-     ul
+    //-         each arr1 in arr
+    //-             li.listItem
+    //-                 //- var a1 = ${arr1}
+    //-                 a(href=`http://127.0.0.1:3000/hotelsIn/${arr1}`)= `${arr1}`
+
+    script.
+        function Search(item){
+        var collection = document.getElementsByClassName("listItem");
+        //- if(collection.length >5){
+        //-     collection = collection.slice(0,5);
+        //- }
+        for (i = 0;i < collection.length && i<7; i++){
+        if (((collection[i].innerHTML).toLowerCase()).indexOf(item) > -1) {
+        collection[i].style.display = "block";
+        } else {
+        collection[i].style.display = "none";
+        }
+        if(item.length==0) {
+        collection[i].style.display = "none";
+        }
+        }
+        }           
+        var it = document.getElementById('searchBar').value;
+        var collection = document.getElementsByClassName("listItem");
+        for (i = 0;i < collection.length; i++){
+        if(it.length==0) {
+        collection[i].style.display = "none";
+        }
+        }
+
+        function showLocation(position) {
+            //- var latitude = position.coords.latitude;
+            //- var longitude = position.coords.longitude;
+            //- alert("Latitude : " + latitude + " Longitude: " + longitude);
+            location.assign(`/hotelsWithin/${position.coords.latitude},${position.coords.longitude}`);
+         }
+
+         function errorHandler(err) {
+            if(err.code == 1) {
+               alert("Error: Access is denied!");
+            } else if( err.code == 2) {
+               alert("Error: Position is unavailable!");
+            }
+         }
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                console.log(navigator.geolocation.getCurrentPosition(showLocation , errorHandler));
+            } else { 
+                //- x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+        
+    
+    script(src='https://unpkg.com/axios/dist/axios.min.js')
+    script(type='module' src="/js/index.js")
+    //- script(type='module' src="/js/a2.js")

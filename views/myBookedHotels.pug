@@ -1,0 +1,56 @@
+extends base
+
+block content
+    .b1
+        .b2
+            h1(style="padding-left:10%") Booking History
+            hr(style="width:20%; margin-left:10%")
+            br
+            br
+            //- .card-container
+            each hotel1 in hotels
+                h2(style="padding-left:10%")= `${hotel1.hotel.name}`
+                h5(style="padding-left:10%;padding-top:0.8%; font-family: Arial")=`${hotel1.hotel.startLocation.address}`
+                br
+                br
+                h3(style="padding-left:10%; font-family: Arial")= `Booking Id : ${hotel1.id}`
+                br
+                h3(style="padding-left:10%; font-family: Arial")= `Date of visit :  ${hotel1.date1}`
+                br
+                h3(style="padding-left:10%; font-family:Arial")= ` ₹ ${hotel1.price}`
+                //- a(href="http://localhost:3000/writeReview");
+                a(href=`http://localhost:3000/writeReview/${hotel1.hotel.slug}` style="margin-left:70%;")
+                    input.aBtn(type='submit' value='Write a Review' style=" background-color:#e4423f; color:white ; padding:1.5%; border-radius:10%; font-family:Arial ; font-size:large")
+                //- h2=`http://localhost:3000/writeReview/${hotel1.slug}`
+                //-p= `${hotel1.date1}`
+                br
+                br
+                hr(style="width:80%; margin-left:10%")
+                br
+
+
+
+
+
+
+
+
+
+
+
+                //- p= `${hotel.city}`
+                //- p= `${hotel.seller.name}` 
+                //- p= `${hotel.seller.email}`
+                //- p= `Avg Rating     ${hotel.ratingsAverage}`
+                //- p= `No. of Reviews ${hotel.ratingsQuantity}`
+                //- p= `http://127.0.0.1:3000/hotel/${hotel.slug}`
+                //- //-button#search-detail(data-hotel-id=`${hotel.slug}`) Details!
+                //- //-button(onclick="document.location=`http://127.0.0.1:3000/hotel/{hotel.slug}`") HTML Tutorial
+                //- //-a(href=`/hotel/${hotel.slug}`) Details
+                //- a(href=`http://localhost:3000/hotel/${hotel.slug}`)
+                //-     input(type='submit' value='Details')
+                //- br
+                //- br
+                //- br
+
+

@@ -1,0 +1,49 @@
+extends base
+
+block content
+    .c1 
+        .c2 
+            br
+            h1 Write a Review 
+            br
+            br
+            h2= `${hotel.name}`
+            br
+            br
+            //- form.form.form-review-data
+            //-     .form__group
+            //-         label.form__label(for='name') Comment
+            //-         input#name.form__input(type='text', value=`${user.name}`, required, name='name')
+            //-     .form__group.ma-bt-md
+            //-         label.form__label(for='email') Email address
+            //-         input#email.form__input(type='email', value=`${user.email}`, required, name='email')    
+            //-     .form__group 
+            //-         <label class="stars" for="starType">Card Type:</label>
+            //-         <select id="starType" name="starss">
+            //-             <option value='0'>--- Please select ---</option>
+            //-             <option value='1'>1</option>
+            //-             <option value='2'>2</option>
+            //-             <option value='3'>3</option>
+            //-             <option value='4'>4</option>
+            //-             <option value='5'>5</option>
+            //-         </select><br/>   
+            //-         //- <input type="button" onclick="fun()" value="click here">         
+            //-     .form__group.right
+            //-         button.btn.btn--small.btn--green#review-Btn Save settings
+            .review-form
+                //- h2.heading-secondary.ma-bt-lg Write a Review
+                //-br
+                form.complete-form
+                    .form__group
+                        label.form__label(for='comment') Comment
+                        input#comment.form__input(type='text', placeholder='Your comments.....', required)
+                    .form__group
+                        label.form__label(for='stars') Password
+                        input#stars.form__input(type='number', placeholder='Enter a value from 1 to 5', required, max=5, min=1)
+                    form__group
+                        label.form__label(for='hotelId') Comment
+                        input#hotelId.form__input(type='hidden' name='hotelId' value=`${hotel.id}`)
+                    .form__group
+                        button.btn.btn--green Create Review
+    script(src='https://unpkg.com/axios/dist/axios.min.js')               
+    script(src="/js/review.js")

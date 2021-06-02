@@ -13,16 +13,20 @@ const bookingSchema = new mongoose.Schema({
 		required: true,
 	},
 
-	bookingDate: Date,
+//	bookingDate: Date,
 
-	roomType: {
-		type: String,
-		enum: ['deluxeRooms', 'premiumRooms'],
-	},
+	// roomType: {
+	// 	type: String,
+	// 	enum: ['deluxeRooms', 'premiumRooms'],
+	// },
 
 	price: {
 		type: Number,
 		required: true,
+	},
+	date1: {
+		type: String,
+		required: true
 	},
 	createdAt: {
 		type: Date,
@@ -30,8 +34,17 @@ const bookingSchema = new mongoose.Schema({
 	},
 });
 
+bookingSchema.pre(/^save/, function (next) {
+	this
+		//.populate('user')
+		.populate('hotel');
+	next();
+});
+
 bookingSchema.pre(/^find/, function (next) {
-	this.populate('user').populate('hotel');
+	this
+		//.populate('user')
+		.populate('hotel');
 	next();
 });
 

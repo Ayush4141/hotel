@@ -2,7 +2,7 @@ console.log('HELLO FROM FRONT END..');
 
 //const axios = require('axios');
 // import '@babel/polyfill';
-// import { signup } from './signup';
+
 //DOM ELEMENTS
 
 const signup = async (name, email, password, passwordConfirm) => {
@@ -55,6 +55,12 @@ const login = async (email, password) => {
 			},
 		});
 		console.log(res.data);
+		if (res.data.status === 'success') {
+			//showAlert('success', 'Logged in successfully!');
+			window.setTimeout(() => {
+				location.assign('/');
+			}, 1000);
+		}
 	} catch (err) {
 		console.log(err.response.message);
 	}
@@ -71,5 +77,28 @@ if (loginForm) {
 		console.log(email, password);
 
 		login(email, password);
+	});
+}
+
+const logout = document.getElementById('log-out');
+
+const logout1 = async () => {
+	try {
+		const res = await axios({
+			method: 'GET',
+			url: 'http://localhost:3000/api/users/logout',
+		});
+		if ((res.data.status = 'success')) location.reload(true);
+	} catch (err) {
+		console.log(err.response);
+		//showAlert('error', 'Error logging out! Try again.');
+	}
+};
+
+if (logout) {
+	console.log('abc');
+	logout.addEventListener('click', (e) => {
+		e.preventDefault();
+		logout1();
 	});
 }
